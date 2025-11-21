@@ -8,9 +8,9 @@ Each problem is placed in its own folder inside the `src/` directory.
 ## 📁 Folder Structure
 
 src/
-problem1/ # Static HTML task
-problem2/ # React + Vite application
-problem3/ # Messy React refactoring task
+- problem1/ # Static HTML task
+- problem2/ # React + Vite application
+- problem3/ # Messy React refactoring task
 
 
 
