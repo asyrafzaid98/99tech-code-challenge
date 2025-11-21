@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Sum to N — 3 ways</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, Roboto, Arial;
+      padding: 24px;
+      /* max-width: 640px; */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    input[type="number"] {
+      width: 120px;
+      padding: 6px;
+      margin-top: 6px;
+    }
+
+    .button-wrap {
+      margin-top: 12px;
+    }
+
+    button {
+      margin-left: 8px;
+      padding: 6px 10px;
+    }
+
+    .result {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #f4f4f6;
+    }
+
+    .row {
+      margin-top: 8px;
+    }
+
+    code {
+      background: #eee;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Sum to n — Three Implementations</h2>
+
+  <label for="n">Enter n:</label>
+  <input id="n" type="number" value="5" min="0" />
+
+  <div class="button-wrap">
+    <button id="runAll">Run all</button>
+    <button id="runA">Run loop (A)</button>
+    <button id="runB">Run recursion (B)</button>
+    <button id="runC">Run formula (C)</button>
+  </div>
+
+  <div class="result" id="output">
+    <div><strong>Results will appear here</strong></div>
+    <div class="row" id="resA"></div>
+    <div class="row" id="resB"></div>
+    <div class="row" id="resC"></div>
+    <div class="row" id="time"></div>
+  </div>
+
+  <script>
+    // functions (same as provided above)
+    var sum_to_n_a = function (n) {
+      n = Number(n) || 0;
+      if (n <= 0) return 0;
+      let sum = 0;
+      for (let i = 1; i <= n; i++) {
+        sum += i;
+      }
+      return sum;
+    };
+
+    var sum_to_n_b = function (n) {
+      n = Number(n) || 0;
+      if (n <= 0) return 0;
+      if (n === 1) return 1;
+      return n + sum_to_n_b(n - 1);
+    };
+
+    var sum_to_n_c = function (n) {
+      n = Number(n) || 0;
+      if (n <= 0) return 0;
+      return (n * (n + 1)) / 2;
+    };
+
+    // helper to display
+    function display(id, text) {
+      document.getElementById(id).innerText = text;
+    }
+
+    function runAll() {
+      const n = document.getElementById('n').valueAsNumber;
+      // A
+      const t0 = performance.now();
+      const a = sum_to_n_a(n);
+      const t1 = performance.now();
+      // B
+      const b = sum_to_n_b(n);
+      const t2 = performance.now();
+      // C
+      const c = sum_to_n_c(n);
+      const t3 = performance.now();
+
+      display('resA', `A (loop) result: ${a}  — time: ${(t1 - t0).toFixed(3)} ms`);
+      display('resB', `B (recursion) result: ${b} — time: ${(t2 - t1).toFixed(3)} ms`);
+      display('resC', `C (formula) result: ${c} — time: ${(t3 - t2).toFixed(6)} ms`);
+
+      display('time', `Note: formula is O(1). Recursion may hit call-stack limits for large n.`);
+      console.log('sum_to_n results', { n, a, b, c });
+    }
+
+    document.getElementById('runAll').addEventListener('click', runAll);
+    document.getElementById('runA').addEventListener('click', () => {
+      const n = document.getElementById('n').valueAsNumber;
+      display('resA', `A (loop) result: ${sum_to_n_a(n)}`);
+      console.log('A', n, sum_to_n_a(n));
+    });
+    document.getElementById('runB').addEventListener('click', () => {
+      const n = document.getElementById('n').valueAsNumber;
+      display('resB', `B (recursion) result: ${sum_to_n_b(n)}`);
+      console.log('B', n, sum_to_n_b(n));
+    });
+    document.getElementById('runC').addEventListener('click', () => {
+      const n = document.getElementById('n').valueAsNumber;
+      display('resC', `C (formula) result: ${sum_to_n_c(n)}`);
+      console.log('C', n, sum_to_n_c(n));
+    });
+
+    // run once on load
+    runAll();
+  </script>
+</body>
+
+</html>
