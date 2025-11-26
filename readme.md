@@ -89,8 +89,8 @@ Given a deliberately messy React + TypeScript code snippet, the task was to:
 `src/problem3/`
 
 Files include:
-- `explain.jsx` – Consist of Task Question and Explanation of issues
-- `refactor.jsx` – Clean, corrected implementation
+- `explain.tsx` – Consist of Task Question and Explanation of issues
+- `refactor.tsx` – Clean, corrected implementation
 
 ---
 
